@@ -7,13 +7,11 @@ import java.util.List;
 
 import client.Client;
 
-public class ServerImpl extends UnicastRemoteObject implements Server {
+public class ServerImpl implements Server {
 
 	
 	private List<Client> clients;
-	private static final long serialVersionUID = 2L;
-	
-	
+		
 	public ServerImpl() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub

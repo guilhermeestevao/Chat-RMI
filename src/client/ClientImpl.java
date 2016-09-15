@@ -9,6 +9,7 @@ import server.Message;
 
 public class ClientImpl extends UnicastRemoteObject implements Client {
 
+
 	private static final long serialVersionUID = 1L;
 
 	private List<Message> messages;

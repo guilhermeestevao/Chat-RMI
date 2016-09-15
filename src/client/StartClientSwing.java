@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
@@ -169,11 +172,13 @@ public class StartClientSwing extends JFrame implements ClientImpl.ListenerReciv
 		btnEnviar.addActionListener(action);
 	}
 
-	private void registerOnServer(String hostName) throws IOException, NotBoundException{
-		String registryURL = "rmi://localhost:" + 1099 + "/chat";  
+	private void registerOnServer(String name) throws IOException, NotBoundException{
+		
+		String registryURL = "chat";  
 		server = (Server)Naming.lookup(registryURL);
-		client = new ClientImpl(hostName, this);
+		client = new ClientImpl(name, this);
 		server.registerCliente(client);
+		
 	}
 
 	private void unregisterServer() throws RemoteException{
@@ -184,7 +189,7 @@ public class StartClientSwing extends JFrame implements ClientImpl.ListenerReciv
 		Message msg = new Message(client.getName(), text);
 		server.sendMessage(msg);
 	}
-
+	
 	@Override
 	public void addMessage(Message message) {
 		// TODO Auto-generated method stub
